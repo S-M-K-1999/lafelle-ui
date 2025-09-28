@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.form-control {
+  font-size: 1.5rem !important; /* Increase text size inside the box */
+  padding: 0.5rem 0.75rem; /* Increase vertical and horizontal padding */
+  height: auto; /* Ensure height adjusts to padding and font size */
+}
