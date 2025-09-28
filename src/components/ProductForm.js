@@ -758,7 +758,7 @@ const ProductForm = () => {
                                     <div style={styles.imagePreviewContainer}>
                                         <img
                                             src={imagePreview}
-                                            alt="Current product image"
+                                            alt="Current product"
                                             style={styles.imagePreview}
                                             onClick={() => openImageModal(imagePreview)}
                                             onMouseEnter={(e) => e.target.style.transform = 'scale(1.02)'}

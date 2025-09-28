@@ -81,9 +81,6 @@ class Contact extends React.Component {
     this.setState({ successModal: false, errorModal: false });
   };
 
-  resetForm = () => {
-    this.setState({ name: "", email: "", message: "" });
-  };
 
   render() {
     let submitButtonRender = (
