@@ -1,5 +1,4 @@
 import React from "react";
-import { Row, Col } from "react-flexbox-grid";
 import Masonry from "react-masonry-css";
 //Scss
 import "./portfolio.scss";
@@ -146,8 +145,8 @@ class Portfolio extends React.Component {
       <div id="portfolio">
         <div className="wrapper">
           <Title title="WORK SHOWCASE." />
-          <Row>
-            <Col xs={12} sm={12} md={8} lg={9}>
+          <div className="row">
+            <div className="col-12 col-md-8 col-lg-9">
               <div className="portfolio__nav">
                 <ul>
                   <li className={this.state.pickedFilter === "all" ? "portfolio__nav-active font12" : "font12"} onClick={() => this.filterGallery("all")}>
@@ -170,21 +169,23 @@ class Portfolio extends React.Component {
                   </li>
                 </ul>
               </div>
-            </Col>
-            <Col xs={12} sm={12} md={4} lg={3}>
+            </div>
+            <div className="col-12 col-md-4 col-lg-3">
               <div className="portfolio__filter" onMouseEnter={() => this.filterMenuHover(true)} onMouseLeave={() => this.filterMenuHover(false)}>
                 <p className="font12">{this.state.pickedFilterDropdown} FIRST</p>
                 <img src={Arrow} alt="arrow" />
                 {filterDroppDown}
               </div>
-            </Col>
-          </Row>
+            </div>
+          </div>
           <Masonry breakpointCols={portfolioBreakpoints} className="my-masonry-grid" columnClassName="mint__gallery">
             {projectsRender}
           </Masonry>
-          <Row className="flex-center padding40">
-            <Button label="HAVE WORK FOR US?" target={"contact"} />
-          </Row>
+          <div className="row flex-center padding40">
+            <div className="col-12">
+              <Button label="HAVE WORK FOR US?" target={"contact"} />
+            </div>
+          </div>
         </div>
       </div>
     );

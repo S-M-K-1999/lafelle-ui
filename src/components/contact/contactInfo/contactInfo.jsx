@@ -1,5 +1,4 @@
 import React from "react";
-import { Row, Col } from "react-flexbox-grid";
 import "./contactInfo.scss";
 
 import ContactInfoBox from "../contactInfo/contactInfoBox";
@@ -11,33 +10,33 @@ import ContactInfoIcon3 from "../../../assets/contact/contact-info-icon3.svg";
 
 
 const contactInfo = () => (
-  <Row>
-    <Col xs={12}>
-      <Row center="xs">
-        <Col xs={12} lg={3} className="contact__info">
+  <div className="row">
+    <div className="col-12">
+      <div className="row justify-content-center">
+        <div className="col-12 col-lg-3 contact__info">
           <ContactInfoBox
             icon={ContactInfoIcon1}
             textLine1="1211 Awesome Avenue,"
             textLine2="NY USD"
           />
-        </Col>
-        <Col xs={12} lg={3} className="contact__info">
+        </div>
+        <div className="col-12 col-lg-3 contact__info">
           <ContactInfoBox
             icon={ContactInfoIcon2}
             textLine1="+00 123 - 456 -78"
             textLine2="+00 987 - 654 -32"
           />
-        </Col>
-        <Col xs={12} lg={3} className="contact__info">
+        </div>
+        <div className="col-12 col-lg-3 contact__info">
           <ContactInfoBox
             icon={ContactInfoIcon3}
             textLine1="mint@mintmail.com"
             textLine2=""
           />
-        </Col>
-      </Row>
-    </Col>
-  </Row>
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 export default contactInfo;

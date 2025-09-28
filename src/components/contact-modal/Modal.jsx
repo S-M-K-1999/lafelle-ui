@@ -1,5 +1,4 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import "./modal.scss";
 
 import Backdrop from "./ModalBackdrop";
@@ -11,15 +10,15 @@ const modal = (props) => {
   let innerModalRender = null;
   if (props.status === "success") {
     innerModalRender = (
-      <Fade bottom duration={500}>
+      <div className="fade-in">
         <SuccessModal closeModal={props.closeModal} />
-      </Fade>
+      </div>
     );
   }else if (props.status === "error") {
     innerModalRender = (
-      <Fade bottom duration={500}>
+      <div className="fade-in">
         <ErrorModal closeModal={props.closeModal} />
-      </Fade>
+      </div>
     );
   }
 

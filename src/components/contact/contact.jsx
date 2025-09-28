@@ -1,5 +1,4 @@
 import React from "react";
-import { Row, Col } from "react-flexbox-grid";
 import "./contact.scss";
 import * as emailjs from "emailjs-com";
 import Title from "../ui-components/title/title";
@@ -118,8 +117,8 @@ class Contact extends React.Component {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt<br></br>ut labore et dolore magna aliqua.
           </p>
 
-          <Row className="padding40">
-            <Col md={12} lg={6}>
+          <div className="row padding40">
+            <div className="col-12 col-lg-6">
               <form id="contact-form" onSubmit={this.handleSubmit}>
                 <h4 className="font30 weight800 padding30">Send Us Message.</h4>
                 <input type="text" placeholder="Name" required name="name" value={this.state.name} onChange={this.inputHandler} />
@@ -135,13 +134,13 @@ class Contact extends React.Component {
                 ></textarea>
                 {submitButtonRender}
               </form>
-            </Col>
-            <Col md={12} lg={6}>
+            </div>
+            <div className="col-12 col-lg-6">
               <div className="flex-center">
                 <img src={ContactBackground} alt="contact background" />
               </div>
-            </Col>
-          </Row>
+            </div>
+          </div>
           <ContactInfo />
           <ContactSocial />
         </div>

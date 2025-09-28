@@ -1,5 +1,4 @@
 import React from "react";
-import { Row, Col } from "react-flexbox-grid";
 // SCSS
 import "./hero.scss";
 //Assets
@@ -10,8 +9,8 @@ import Button from '../ui-components/button/button';
 const hero = () => (
   <div className="hero" id="hero">
     <div className="wrapper">
-      <Row>
-        <Col md={12} lg={6}>
+      <div className="row">
+        <div className="col-12 col-lg-6">
           <div className="hero-info">
             <h1 className="weight800 font60">
               Beautiful Blooms, Delivered to Your Door.
@@ -21,13 +20,13 @@ const hero = () => (
             </p>
             <Button label="SHOP NOW" target={"contact"} />
           </div>
-        </Col>
-        <Col md={12} lg={6}>
+        </div>
+        <div className="col-12 col-lg-6">
           <div className="hero-image">
             <img src={HeroImage} alt="hero" />
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   </div>
 );

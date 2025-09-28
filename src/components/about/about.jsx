@@ -1,5 +1,4 @@
 import React from "react";
-import { Row, Col } from "react-flexbox-grid";
 import "./about.scss";
 // Components
 import TeamBox from './teamBox';
@@ -17,17 +16,17 @@ const about = () => (
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt<br></br>ut labore et dolore magna aliqua.
       </p>
-      <Row>
-        <Col md={12} lg={4}>
+      <div className="row">
+        <div className="col-12 col-lg-4">
           <TeamBox avatar={Person01} name="Luke Skywalker" job="Web designer" />
-        </Col>
-        <Col md={12} lg={4}>
+        </div>
+        <div className="col-12 col-lg-4">
           <TeamBox avatar={Person02} name="Han Solo" job="Graphic Designer" />
-        </Col>
-        <Col md={12} lg={4}>
+        </div>
+        <div className="col-12 col-lg-4">
           <TeamInfo />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   </div>
 );
