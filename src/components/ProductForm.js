@@ -29,6 +29,7 @@ const ProductForm = () => {
     const API_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
+
         if (isEditing) {
             setLoading(true);
             axios.get(`${API_URL}/v1/products/${id}`)

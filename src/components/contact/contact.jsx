@@ -37,7 +37,7 @@ class Contact extends React.Component {
     Message: ${message}`;
   
     // Open WhatsApp chat
-    window.open(`https://wa.me/918943694548?text=${text}`, "_blank");
+    window.open(`https://wa.me/${process.env.REACT_APP_WHATSAPP_NUMBER}?text=${text}`, "_blank");
     
     // Optional: reset form
     this.resetForm();
