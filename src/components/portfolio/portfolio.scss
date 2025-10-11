@@ -1,5 +1,16 @@
 @import '../../style/App.scss';
 
+// --- NEW CAROUSEL VARIABLES ---
+// Adjust these values to match the size of your ProjectBox component
+$project-box-width: 300px; 
+$project-box-height: 280px; 
+$gutter-size: 30px; 
+$border-color: #cccccc; // <-- ADD THIS LINE
+$main-color: #ff6600; // You already use this
+$light-color: #ffffff; // You already use this
+$dark-color: #333333; // You already use this
+// --- END NEW CAROUSEL VARIABLES ---
+
 #portfolio {
   padding: 20px 0 40px 0;
 
@@ -20,6 +31,7 @@
       background-color: $main-color;
     }
   }
+
   .portfolio__filter {
     display: flex;
     justify-content: flex-end;
@@ -55,24 +67,83 @@
       }
     }
   }
+
+  // --- NEW CAROUSEL STYLES ---
+
+  .portfolio__grid-wrapper {
+    position: relative;
+    margin-top: 20px;
+    // Add horizontal padding to make space for the scroll buttons
+    padding: 0 40px; 
+  }
+
+  .portfolio__carousel {
+    display: flex;
+    flex-wrap: wrap; // Allows items to wrap into multiple rows
+    
+    // Limits the height to exactly two rows of project boxes plus the gutter space
+    height: calc(2 * #{$project-box-height} + #{$gutter-size}); 
+    
+    overflow-x: scroll; // Essential for horizontal scrolling
+    overflow-y: hidden; // Prevents vertical scrollbar
+    scroll-behavior: smooth; // Makes button scrolling smooth
+    
+    // Optional: Hide scrollbar visually across browsers
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar { /* Chrome, Safari, Opera */
+        display: none;
+    }
+
+    // Target the individual ProjectBox components (or whatever class they render as)
+    > div { // Assuming ProjectBox renders as a direct child div
+        flex: 0 0 $project-box-width; // Fix the width of each item
+        height: $project-box-height; // Fix the height
+        // Add margin to the right and bottom for spacing between items
+        margin: 0 $gutter-size $gutter-size 0; 
+        
+        // This ensures the two-row wrap happens correctly based on the fixed width and height
+    }
+  }
+
+  .portfolio__nav-button {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 30px;
+    height: 60px;
+    background-color: $light-color; // Use a light background
+    border: 1px solid $border-color; // Use a border color defined in App.scss, or fallback
+    color: $dark-color;
+    opacity: 0.8;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 55px;
+    text-align: center;
+    border-radius: 5px;
+    transition: opacity 0.3s;
+    
+    &:hover {
+        opacity: 1;
+    }
+
+    &--left {
+      left: 0;
+    }
+    
+    &--right {
+      right: 0;
+    }
+  }
+
+  // --- END NEW CAROUSEL STYLES ---
 }
 
-.my-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
-  display: flex;
-  margin-left: -30px; /* gutter size offset */
-  width: auto;
-}
-.mint__gallery {
-  padding-left: 30px; /* gutter size */
-  background-clip: padding-box;
-}
- 
-/* Style your items */
-.mint__gallery > div { /* change div to reference your elements you put in <Masonry> */
-  margin-bottom: 30px;
-}
+// --- REMOVED MASONRY STYLES ---
+/* The following Masonry styles are no longer needed:
+.my-masonry-grid, .mint__gallery, .mint__gallery > div 
+*/
 
 @media screen and (max-width: 767px) {
   #portfolio {
@@ -86,8 +157,8 @@
       max-width: 200px;
       margin: 30px auto;
       float: none;
-
     }
+    // Adjust carousel for mobile if needed (e.g., make project boxes smaller)
   }
 }
 
@@ -99,7 +170,6 @@
           padding: 5px 5px;
           margin-right: 5px;
         }
-
       }
     }
   }
