@@ -3,7 +3,7 @@ import "./WhatsAppButton.scss";
 import WhatsAppIcon from "../../assets/icons/whatsapp.png"; // update path if needed
 
 const WhatsAppButton = () => {
-  const phoneNumber = "911234567890"; // your WhatsApp number with country code
+  const phoneNumber = "+971589114422"; // your WhatsApp number with country code
   const message = "Hi, I'm interested in your products!";
   
   const handleClick = () => {
