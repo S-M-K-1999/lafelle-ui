@@ -840,12 +840,7 @@ const ProductForm = () => {
                                         <div style={styles.fileInfo}>
                                             ✅ Image compressed and converted to base64 - ready to send
                                         </div>
-                                        {originalFileSize && compressedFileSize && (
-                                            <div style={styles.fileInfo}>
-                                                📊 Size: {(originalFileSize / 1024 / 1024).toFixed(2)}MB → {(compressedFileSize / 1024 / 1024).toFixed(2)}MB 
-                                                ({(Math.round((1 - compressedFileSize / originalFileSize) * 100))}% reduction)
-                                            </div>
-                                        )}
+                                        
                                     </div>
                                 )}
                             </div>

@@ -14,9 +14,7 @@ const Navbar = ({ setIsLoggedIn }) => { // Accept setIsLoggedIn as a prop
             <Link to="/admin" className="navbar-brand">Admin Panel</Link>
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav me-auto">
-                    <li className="navbar-item">
-                        <Link to="/admin/create" className="nav-link">Create Product</Link>
-                    </li>
+
                 </ul>
                 <button onClick={handleLogout} className="btn btn-outline-danger" style={{ fontSize: '1.5rem' }}>Logout</button>
             </div>

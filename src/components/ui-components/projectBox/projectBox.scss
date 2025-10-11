@@ -1,31 +1,76 @@
-  @import '../../../style/App.scss';
-  
-  .portfolio__box {
-    position: relative;
-    max-width: 370px;
-    margin: 15px auto;
-    cursor: pointer;
+@import '../../../style/App.scss';
 
-    img {
-      width: 100%;
-      height: auto;
+.portfolio__box {
+  position: relative;
+  width: 300px;
+  height: 280px;
+  margin: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.portfolio__box > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.portfolio__hover-info {
+  background-color: rgba($main-color, 0.8);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; // space around text
+
+  p {
+    text-transform: uppercase;
+    text-align: center;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+.portfolio__box:hover .portfolio__hover-info {
+  opacity: 1;
+  background-color: rgba(255, 255, 0, 0.7);
+}
+
+/* 📱 Mobile view adjustments */
+@media screen and (max-width: 767px) {
+
+  .portfolio__hover-info {
+    padding: 8px;
+
+    p.font30 {
+      font-size: 20px;
+      line-height: 1.2;
     }
 
-    .portfolio__hover-info {
-      background-color: rgba($main-color, 0.8);
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: 0.3s ease;
-      
-      p {
-        text-transform: uppercase;
-      }
-    }
-    .portfolio__hover-info:hover {
-      opacity: 1;
+    p.font12 {
+      font-size: 12px;
     }
   }
+
+  // Optional: prevent titles from overflowing too many lines
+  .portfolio__hover-info p.font30 {
+    padding-left: 0px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
