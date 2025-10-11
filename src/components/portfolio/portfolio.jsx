@@ -202,13 +202,13 @@ class Portfolio extends React.Component {
                 </ul>
               </div>
             </div>
-            <div className="col-12 col-md-4 col-lg-3">
+            {/* <div className="col-12 col-md-4 col-lg-3">
               <div className="portfolio__filter" onMouseEnter={() => this.filterMenuHover(true)} onMouseLeave={() => this.filterMenuHover(false)}>
                 <p className="font12">{pickedFilterDropdown} FIRST</p>
                 <img src={Arrow} alt="arrow" />
                 {filterDroppDown}
               </div>
-            </div>
+            </div> */}
           </div>
           
           {/* --- CAROUSEL/GRID SECTION --- */}
