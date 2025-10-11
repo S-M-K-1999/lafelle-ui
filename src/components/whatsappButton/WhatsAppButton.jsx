@@ -7,9 +7,6 @@ const WhatsAppButton = () => {
   const message = "Hi, I'm interested in your products!";
   
   const handleClick = () => {
-    console.log("phone number--->", phoneNumber)
-    console.log("=--->", process.env.REACT_APP_API_URL)
-
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
