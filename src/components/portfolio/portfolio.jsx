@@ -231,7 +231,7 @@ class Portfolio extends React.Component {
                 onScroll={this.handleScroll}
                 style={{
                     display: 'flex',
-                    flexWrap: 'wrap',
+                    // flexWrap: 'wrap',
                     overflowX: 'auto',
                     overflowY: 'hidden',
                     // Height is controlled by CSS in portfolio.scss

@@ -68,7 +68,6 @@ class LandingPage extends React.Component {
         />
         <Hero />
         <Portfolio />
-        <Partners />
         <About />
         <Contact />
         <Footer />

@@ -79,10 +79,10 @@ $dark-color: #333333; // You already use this
 
   .portfolio__carousel {
     display: flex;
-    flex-wrap: wrap; // Allows items to wrap into multiple rows
+    // flex-wrap: wrap; // Allows items to wrap into multiple rows
     
     // Limits the height to exactly two rows of project boxes plus the gutter space
-    height: calc(2 * #{$project-box-height} + #{$gutter-size}); 
+    // height: calc(2 * #{$project-box-height} + #{$gutter-size}); 
     
     overflow-x: scroll; // Essential for horizontal scrolling
     overflow-y: hidden; // Prevents vertical scrollbar
