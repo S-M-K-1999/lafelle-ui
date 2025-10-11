@@ -5,23 +5,19 @@ import TeamBox from './teamBox';
 import TeamInfo from "./teamInfo";
 import Title from "../ui-components/title/title";
 // Assets
-import Person01 from "../../assets/about/person01.png";
-import Person02 from "../../assets/about/person02.png";
+import shop1 from "../../assets/shop/shop1.jpeg";
 
 const about = () => (
   <div id="about">
     <div className="wrapper">
       <Title title="ABOUT US." />
-      <p className="font12">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt<br></br>ut labore et dolore magna aliqua.
+      <p className="font15" style={{fontSize: '1.2rem'}}>
+        We bring joy to every moment with beautifully crafted floral arrangements and irresistible chocolates made with love.<br></br> 
+        Our passion is creating thoughtful gifts that speak from the heart and make every occasion unforgettable.
       </p>
       <div className="row">
         <div className="col-12 col-lg-4">
-          <TeamBox avatar={Person01} name="Luke Skywalker" job="Web designer" />
-        </div>
-        <div className="col-12 col-lg-4">
-          <TeamBox avatar={Person02} name="Han Solo" job="Graphic Designer" />
+          <TeamBox avatar={shop1} name="Lafelle Flowers" job="alain" />
         </div>
         <div className="col-12 col-lg-4">
           <TeamInfo />

@@ -12,7 +12,7 @@ const partnerBox = () => (
         <div className="col-12 col-sm-6 col-md-6">
           <div className="footer-box">
             <img src={Logo} alt="logo" />
-            <p>© 2020 - Mint,All Right Reserved</p>
+            <p>© 2025 - Lafelle,All Right Reserved</p>
           </div>
         </div>
         <div className="col-12 col-sm-6 col-md-6">

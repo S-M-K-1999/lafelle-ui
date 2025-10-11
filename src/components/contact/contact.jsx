@@ -26,40 +26,21 @@ class Contact extends React.Component {
   };
 
   handleSubmit = (e) => {
-    var self = this;
-    this.setState({ sending: true });
     e.preventDefault();
-
-    var template_params = {
-      name: this.state.name,
-      email: this.state.email,
-      message: this.state.message,
-    };
-
-
-
-
-    // YOUR EMAIL.JS API KEY IN FORMAT user_xxxxxxxxxxxxxxxxxx
-    let API_KEY = "";
-
-    // YOUR EMAIL.JS TEMPLATE ID
-    let TEMPLATE_ID = "";
-
-
-
-
-    emailjs.send("default_service", TEMPLATE_ID, template_params, API_KEY).then(
-      function (response) {
-        if (response.status === 200) {
-          self.showSuccessModal();
-        } else {
-          self.showErrorModal();
-        }
-      },
-      function (error) {
-        self.showErrorModal();
-      }
-    );
+  
+    const { name, email, message } = this.state;
+  
+    // Format WhatsApp message
+    const text = `New Contact Form Submission:%0A
+    Name: ${name}%0A
+    Email: ${email}%0A
+    Message: ${message}`;
+  
+    // Open WhatsApp chat
+    window.open(`https://wa.me/918943694548?text=${text}`, "_blank");
+    
+    // Optional: reset form
+    this.resetForm();
   };
 
   // SUCCESS MODAL
@@ -110,9 +91,6 @@ class Contact extends React.Component {
         {modalRender}
         <div className="wrapper">
           <Title title="CONTACT US." />
-          <p className="font12">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt<br></br>ut labore et dolore magna aliqua.
-          </p>
 
           <div className="row padding40">
             <div className="col-12 col-lg-6">
@@ -133,12 +111,21 @@ class Contact extends React.Component {
               </form>
             </div>
             <div className="col-12 col-lg-6">
-              <div className="flex-center">
-                <img src={ContactBackground} alt="contact background" />
+              <div className="map-container">
+                <iframe
+                  title="Google Map Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227.31364631401573!2d55.78091431747451!3d24.27608991239806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e8ab5793b00a803%3A0x9ef688bf98da9402!2zbGFmZWxsZSBmbG93ZXJzIGFsYWluINmE2KfZgdmK2YTZiiDYstmH2YjYsSDYp9mE2YfYr9in2YrYpyDZhdiv2YrZhtipINin2YTYudmK2YYg2KfZhNmH2YrZhNmK!5e0!3m2!1sen!2sin!4v1760180752521!5m2!1sen!2sin"
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
           </div>
-          <ContactInfo />
+          {/* <ContactInfo /> */}
           <ContactSocial />
         </div>
       </div>
