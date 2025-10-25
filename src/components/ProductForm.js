@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';  // Instead of axios
 import { useParams, useNavigate } from 'react-router-dom';
 
 const ProductForm = () => {
@@ -32,7 +32,7 @@ const ProductForm = () => {
 
         if (isEditing) {
             setLoading(true);
-            axios.get(`${API_URL}/v1/products/${id}`)
+            api.get(`${API_URL}/v1/products/${id}`)
                 .then(response => {
                     // Pre-fill the form with existing product data
                     const productData = {
@@ -267,11 +267,11 @@ const ProductForm = () => {
         try {
             // Send JSON data instead of FormData since we're using base64
             if (isEditing) {
-                await axios.post(`${API_URL}/v1/products/update/${id}`, productData, {
+                await api.post(`${API_URL}/v1/products/update/${id}`, productData, {
                     headers: { 'Content-Type': 'application/json' }
                 });
             } else {
-                await axios.post(`${API_URL}/v1/products/add`, productData, {
+                await api.post(`${API_URL}/v1/products/add`, productData, {
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
