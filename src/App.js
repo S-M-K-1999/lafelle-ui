@@ -3,8 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import ProductsList from "./components/ProductsList";
-import ProductForm from "./components/ProductForm";
+import ProductsList from "./pages/productList/ProductsList";
+import ProductForm from "./pages/productForm/ProductForm";
 import LoginPage from "./components/LoginPage";
 import ProductCatalogue from "./components/product-catelogue/ProductCatalogue"
 import LandingPage from './components/LandingPage';
