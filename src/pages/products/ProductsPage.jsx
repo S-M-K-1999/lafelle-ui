@@ -44,7 +44,7 @@ const ProductsPage = () => {
           row-cols-sm-3, row-cols-md-3 keep 3 up to md,
           you can adapt for larger screens with row-cols-lg-4 etc.
       */}
-      <div className="row row-cols-3 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-3">
+      <div className="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-5 g-3">
         {products.map(product => (
           <div className="col" key={product._id}>
             <div className="card h-100 product-card">
