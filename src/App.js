@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import ProductsPage from "./pages/products/ProductsPage"
 
 import Navbar from "./components/Navbar";
 import ProductsList from "./pages/productList/ProductsList";
@@ -84,6 +85,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/user/products" element={<ProductCatalogue />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/login" element={
             isLoggedIn ? <Navigate to="/admin" /> : <LoginPage />
           } />
@@ -99,6 +101,7 @@ function App() {
               </div>
             </ProtectedRoute>
           } />
+          
           
           <Route path="/admin/create" element={
             <ProtectedRoute adminOnly={true}>
