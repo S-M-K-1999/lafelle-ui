@@ -1,91 +1,134 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../App';
 
-const LoginPage = ({ setIsLoggedIn, isLoggedIn }) => {
-  const [username, setUsername] = useState('');
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
-  // Redirect if already logged in
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/admin');
-    }
-  }, [isLoggedIn, navigate]);
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simple validation with hardcoded credentials
-    // NOTE: For a real app, this should be an Axios call to your Node.js backend.
-    if (username === 'admin' && password === 'password123') {
-      setIsLoggedIn(true);
-      // In a real app, you would store a JWT/Token here, not just 'true'
-      localStorage.setItem('isLoggedIn', 'true'); 
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await axios.post(`${API_URL}/v1/auth/login`, {
+        email,
+        password
+      });
+
+      const { token, user } = response.data;
+
+      // Use the context login function
+      login(token, user);
+      
+      // Navigate to admin dashboard
       navigate('/admin');
-    } else {
-      alert('Invalid username or password');
+    } catch (error) {
+      console.error('Login error:', error);
+      
+      if (error.response) {
+        setError(error.response.data.message || 'Login failed. Please try again.');
+      } else if (error.request) {
+        setError('Unable to connect to server. Please check your connection.');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Inline styles for a softer, more branded look (often moved to CSS modules)
   const styles = {
     container: {
-      minHeight: '100vh', // Ensure it covers the whole viewport
-      height: '100vh', // Set exact height to prevent scroll
-      backgroundImage: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)', // Soft gradient background
+      minHeight: '100vh',
+      height: '100vh',
+      backgroundImage: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       padding: '20px',
-      overflow: 'hidden', // Prevent any overflow
+      overflow: 'hidden',
     },
     card: {
       width: '100%',
-      maxWidth: '400px', // Use max-width for better responsiveness
+      maxWidth: '400px',
       borderRadius: '15px',
-      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)', // Deeper, softer shadow
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
       border: 'none',
       overflow: 'hidden',
     },
     header: {
-      backgroundColor: '#f8f9fa', // Light gray background for the header
-      color: '#495057', // Darker text color
+      backgroundColor: '#f8f9fa',
+      color: '#495057',
       borderBottom: '1px solid #dee2e6',
       padding: '1.5rem',
     },
-    // Custom style for the input focus to use a softer color
-    inputFocus: {
-        borderColor: '#81c784', // Soft Green/Floral Tone
-        boxShadow: '0 0 0 0.25rem rgba(129, 199, 132, 0.25)',
+    errorAlert: {
+      backgroundColor: '#f8d7da',
+      color: '#721c24',
+      padding: '0.75rem 1.25rem',
+      marginBottom: '1rem',
+      border: '1px solid #f5c6cb',
+      borderRadius: '0.375rem',
+      fontSize: '0.9rem',
+    },
+    loadingSpinner: {
+      display: 'inline-block',
+      width: '1rem',
+      height: '1rem',
+      border: '2px solid transparent',
+      borderTop: '2px solid currentColor',
+      borderRadius: '50%',
+      animation: 'spin 1s linear infinite',
+      marginRight: '0.5rem',
     }
   };
 
+  const spinnerStyles = `
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  `;
 
   return (
     <div style={styles.container}>
+      <style>{spinnerStyles}</style>
+      
       <div className="card" style={styles.card}>
-        {/* Card Header with a branded touch */}
         <div className="card-header text-center" style={styles.header}>
-            {/* Replace this with a real logo image for best effect! */}
-            <h1 className="mb-1" style={{ fontSize: '2.5rem', fontWeight: 700, color: '#38761d' /* Dark Green */ }}>
+            <h1 className="mb-1" style={{ fontSize: '2.5rem', fontWeight: 700, color: '#38761d' }}>
                 🌺 LAFELLE 🌸
             </h1>
             <p className="text-muted mb-0">Admin Access Only</p>
         </div>
 
         <div className="card-body p-4">
+          {error && (
+            <div style={styles.errorAlert} role="alert">
+              ⚠️ {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div className="form-group mb-3">
-              <label className="form-label fw-bold">Username</label>
+              <label className="form-label fw-bold">Email</label>
               <input
-                type="text"
-                className="form-control form-control-lg" // Larger input size
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                className="form-control form-control-lg"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
-                placeholder="Enter your username"
-                // You would need to use a custom CSS class to apply inputFocus globally
-                // For this example, we rely on the larger Bootstrap class 'form-control-lg'
+                placeholder="Enter your email"
+                disabled={loading}
               />
             </div>
             
@@ -93,11 +136,12 @@ const LoginPage = ({ setIsLoggedIn, isLoggedIn }) => {
               <label className="form-label fw-bold">Password</label>
               <input
                 type="password"
-                className="form-control form-control-lg" // Larger input size
+                className="form-control form-control-lg"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Enter your password"
+                disabled={loading}
               />
             </div>
             
@@ -105,19 +149,35 @@ const LoginPage = ({ setIsLoggedIn, isLoggedIn }) => {
               <button 
                 type="submit" 
                 className="btn btn-lg" 
-                // Custom Button Style for a Floral touch
+                disabled={loading}
                 style={{ 
-                    fontSize: '1.3rem', 
-                    backgroundColor: '#81c784', // Soft Green
-                    borderColor: '#68b16c',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    transition: 'background-color 0.2s',
+                  fontSize: '1.3rem', 
+                  backgroundColor: loading ? '#a5d6a7' : '#81c784',
+                  borderColor: '#68b16c',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  transition: 'background-color 0.2s',
+                  opacity: loading ? 0.7 : 1,
                 }}
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#68b16c'} // Darker on hover
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#81c784'} // Restore on mouse out
+                onMouseOver={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.backgroundColor = '#68b16c';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.backgroundColor = '#81c784';
+                  }
+                }}
               >
-                Log In
+                {loading ? (
+                  <>
+                    <span style={styles.loadingSpinner}></span>
+                    Logging in...
+                  </>
+                ) : (
+                  'Log In'
+                )}
               </button>
             </div>
           </form>
