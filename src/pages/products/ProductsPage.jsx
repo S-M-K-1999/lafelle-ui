@@ -22,6 +22,8 @@ const ProductsPage = () => {
     return () => { mounted = false; };
   }, []);
 
+  const WHATSAPP_NUMBER = process.env.REACT_APP_WHATSAPP_NUMBER; // e.g. "91" + your number (no + sign)
+
   const deleteProduct = async (id) => {
     if (!window.confirm('Delete product?')) return;
     try {
@@ -34,6 +36,14 @@ const ProductsPage = () => {
   };
 
   if (loading) return <div className="container py-5">Loading...</div>;
+
+  const handleBuyNow = (product) => {
+    const message = encodeURIComponent(
+      `🌸 Hi! I'm interested in buying this flower.\n\n*Product:* ${product.name}\n💰 *Price:* ₹${product.price}\n🖼️ *Image:* ${product.imageUrl}`
+    );
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+    window.open(url, "_blank");
+  };
 
   return (
     <div className="container py-4">
@@ -63,6 +73,12 @@ const ProductsPage = () => {
                   <p className="mb-1 fw-bold">₹{Number(product.price).toLocaleString()}</p>
                 </div>
               </div>
+              <button
+                  className="btn btn-success mt-auto"
+                  onClick={() => handleBuyNow(product)}
+                >
+                  Buy Now
+              </button>
             </div>
           </div>
         ))}
