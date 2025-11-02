@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-scroll";
 import "./footer.scss";
 
-import Logo from '../../assets/footer/logo.svg';
+import Logo from '../../assets/navbar/logo-white.png';
 import Arrow from '../../assets/footer/arrow.svg';
 
 const partnerBox = () => (
@@ -11,7 +11,7 @@ const partnerBox = () => (
       <div className="row">
         <div className="col-12 col-sm-6 col-md-6">
           <div className="footer-box">
-            <img src={Logo} alt="logo" />
+            <img src={Logo} alt="logo" style={{maxWidth: "15rem"}}/>
             <p>© 2025 - Lafelle,All Right Reserved</p>
           </div>
         </div>
