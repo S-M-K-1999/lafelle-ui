@@ -123,7 +123,6 @@ const ProductsList = () => {
         setProducts(updatedProducts);
         setFilteredProducts(updatedFiltered);
   
-        console.log("✅ Product deleted successfully:", id);
       } catch (error) {
         console.error('Error deleting product:', error);
         alert('Failed to delete product. Please try again.');
@@ -151,7 +150,6 @@ const ProductsList = () => {
   };
   
   const handlePriceChange = (type, value) => {
-    const numValue = parseFloat(value) || 0;
     if (type === 'min') {
       setMinPrice(value);
     } else {

@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-scroll";
+import { useNavigate } from 'react-router-dom';
 // SCSS
 import "./navbar.scss";
 // Assets
 import CloseIcons from '../../assets/navbar/mobile-close.svg';
 import Logo from "../../assets/navbar/logo-white.png";
 
-const mobileNav = (props) => (
+const MobileNav = (props) => {
+  const navigate = useNavigate();
+  return (
   <div className={`mobile__navbar ${props.isOpen ? "mobile__open" : ""}`}>
     <div className="mobile__navbar-close" onClick={props.closeMobileMenu}>
       <img src={CloseIcons} alt="close" />
@@ -64,9 +67,22 @@ const mobileNav = (props) => (
             CONTACT
           </Link>
         </li>
+        <li className="flex-center">
+          <Link
+            activeClass="active-link"
+            to="contact"
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+            onClick={() => navigate('/shop')}
+          >
+            SHOP
+          </Link>
+        </li>
       </ul>
     </div>
   </div>
 );
-
-export default mobileNav;
+}
+export default MobileNav;

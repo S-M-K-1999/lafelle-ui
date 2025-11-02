@@ -18,6 +18,9 @@ const Navbar = () => {
         <Link to="/admin" className="navbar-brand mb-0 h1 text-white" style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>
           🌺 LAFELLE
         </Link>
+        <Link to="/" className="navbar-brand mb-0 h2 text-white" style={{ fontSize: '1.5rem' }}>
+          Home
+        </Link>
 
         {/* Toggle button for mobile */}
         <button

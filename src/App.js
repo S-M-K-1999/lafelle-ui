@@ -5,6 +5,7 @@ import ProductsPage from "./pages/products/ProductsPage"
 
 import Navbar from "./components/Navbar";
 import ProductsList from "./pages/productList/ProductsList";
+import ShopPage from "./pages/productList/ShopPage";
 import ProductForm from "./pages/productForm/ProductForm";
 import LoginPage from "./components/LoginPage";
 import ProductCatalogue from "./components/product-catelogue/ProductCatalogue"
@@ -84,6 +85,7 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />
+          <Route path="/shop" element={<ShopPage />} />
           <Route path="/user/products" element={<ProductCatalogue />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/login" element={

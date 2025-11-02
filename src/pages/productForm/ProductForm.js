@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { categoryService } from '../../services/category';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -19,8 +19,6 @@ const ProductForm = () => {
     const [base64Image, setBase64Image] = useState(null);
     const [convertingImage, setConvertingImage] = useState(false);
     const [compressingImage, setCompressingImage] = useState(false);
-    const [originalFileSize, setOriginalFileSize] = useState(null);
-    const [compressedFileSize, setCompressedFileSize] = useState(null);
     const [showImageModal, setShowImageModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState(null);
     
@@ -55,7 +53,7 @@ const ProductForm = () => {
                         description: response.data.description,
                         price: response.data.price,
                         imageUrl: response.data.imageUrl,
-                        category: response.data.category
+                        category: response.data.category?._id || response.data.category || ''
                     };
                     setProduct(productData);
                     if (productData.imageUrl) {
@@ -159,15 +157,12 @@ const ProductForm = () => {
                 
                 setCompressingImage(true);
                 setConvertingImage(true);
-                setOriginalFileSize(file.size);
                 
                 compressImage(file)
                     .then((compressedBase64) => {
                         setImagePreview(compressedBase64);
                         setBase64Image(compressedBase64);
                         setProduct(prev => ({ ...prev, imageUrl: compressedBase64 }));
-                        const compressedSize = Math.round((compressedBase64.length * 3) / 4);
-                        setCompressedFileSize(compressedSize);
                         setCompressingImage(false);
                         setConvertingImage(false);
                     })
@@ -246,14 +241,18 @@ const ProductForm = () => {
         setBase64Image(null);
         setConvertingImage(false);
         setCompressingImage(false);
-        setOriginalFileSize(null);
-        setCompressedFileSize(null);
         setProduct(prev => ({ ...prev, imageUrl: '' }));
         const fileInput = document.querySelector('input[type="file"]');
         if (fileInput) {
             fileInput.value = '';
         }
     };
+
+    const categoryValue = typeof product.category === 'string'
+        ? product.category.trim()
+        : Array.isArray(product.category)
+        ? product.category.join(', ').trim()
+        : (product.category?.name || '').trim();
 
     const validateForm = () => {
         const newErrors = {};
@@ -267,9 +266,9 @@ const ProductForm = () => {
         if (!product.price || product.price <= 0) {
             newErrors.price = 'Valid price is required';
         }
-        if (!product.category.trim()) {
+        if (!categoryValue) {
             newErrors.category = 'Category is required';
-        }
+          }
         if (!imageFile && !product.imageUrl.trim() && !imagePreview) {
             newErrors.image = 'Image URL or file is required';
         }
@@ -302,7 +301,7 @@ const ProductForm = () => {
 
         try {
             if (isEditing) {
-                await api.post(`${API_URL}/v1/products/update/${id}`, productData, {
+                await api.put(`${API_URL}/v1/products/update/${id}`, productData, {
                     headers: { 'Content-Type': 'application/json' }
                 });
             } else {

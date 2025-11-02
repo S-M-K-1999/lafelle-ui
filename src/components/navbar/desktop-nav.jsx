@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from "react-scroll";
+import { useNavigate } from 'react-router-dom';
  // SCSS
 import './navbar.scss';
 // Assets
 import LogoImg from '../../assets/navbar/logo.png';
 import MobileMenuIcon from '../../assets/navbar/mobile-menu.svg';
 
-const desktopNav = (props) => (
+const DesktopNav = (props) => {
+  const navigate = useNavigate();
+  return (
   <nav className={`Navbar ${!props.userIsScrolled ? "extraLargeNavbar" : ""}`}>
     <div className="wrapper flex-s-between">
       <div>
@@ -34,10 +37,16 @@ const desktopNav = (props) => (
               CONTACT
             </Link>
           </li>
+          <li>
+            <Link activeClass="active-link" onClick={() => navigate('/shop')} spy={true} smooth={true} offset={-70} duration={500}>
+              SHOP
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
-);
+  );
+  }
 
-export default desktopNav;
+export default DesktopNav;

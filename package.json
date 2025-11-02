@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.12.2",
     "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
     "emailjs-com": "^2.4.1",
     "object-assign": "^4.1.1",
     "react": "^19.1.1",
