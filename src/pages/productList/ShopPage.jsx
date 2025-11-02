@@ -3,12 +3,13 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./ShopPage.scss";
-import Logo from "../../assets/navbar/logo.png"
+import Logo from "../../assets/navbar/logo.png";
 
 const ShopPage = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cartCount, setCartCount] = useState(0);
+  const [loading, setLoading] = useState(true); // ✅ Loading state
   const productsPerPage = 9;
 
   // ✅ Fetch products from backend
@@ -19,6 +20,8 @@ const ShopPage = () => {
         setProducts(res.data || []);
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false); // ✅ Stop loading once fetch is done
       }
     };
     fetchProducts();
@@ -31,11 +34,23 @@ const ShopPage = () => {
   const handleAddToCart = () => setCartCount((count) => count + 1);
 
   const handleBuyNow = (product) => {
-    const whatsappNumber = process.env.REACT_APP_WHATSAPP_NUMBER; // ✅ replace with your WhatsApp number
+    const whatsappNumber = process.env.REACT_APP_WHATSAPP_NUMBER; 
     const message = `Hello! I'm interested in *${product.name}* (${product.model}) priced at $${product.price}.`;
     const encodedMsg = encodeURIComponent(message);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedMsg}`, "_blank");
   };
+
+  if (loading) {
+    return (
+      <div className="loading-screen d-flex flex-column justify-content-center align-items-center vh-100 text-center bg-light">
+        <div className="spinner-border text-dark mb-4" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <h2 className="mb-2">Your beautiful store is loading...</h2>
+        <p className="text-muted">Just a moment, amazing products are on their way!</p>
+      </div>
+    );
+  }
 
   return (
     <div className="shop-page">
