@@ -35,7 +35,7 @@ const ShopPage = () => {
 
   const handleBuyNow = (product) => {
     const whatsappNumber = process.env.REACT_APP_WHATSAPP_NUMBER; 
-    const message = `Hello! I'm interested in *${product.name}* (${product.model}) priced at $${product.price}.`;
+    const message = `Hello! I'm interested in your product \nName: *${product.name}* \nCategory: ${product.category?.name} \nprice: $${product.price}.`;
     const encodedMsg = encodeURIComponent(message);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedMsg}`, "_blank");
   };
