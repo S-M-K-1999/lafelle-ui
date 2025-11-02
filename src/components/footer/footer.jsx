@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-scroll";
 import "./footer.scss";
 
-import Logo from '../../assets/navbar/logo-white.png';
+import Logo from './logo-white.png';
 import Arrow from '../../assets/footer/arrow.svg';
 
 const partnerBox = () => (
